@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sung-MD WhatsApp Bot | Premium Subscription</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #25D366;
+            --primary-dark: #128C7E;
+            --secondary: #075E54;
+            --accent: #34B7F1;
+            --dark: #0a0a0a;
+            --light: #f5f5f5;
+            --gray: #666;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --success: #4CAF50;
+            --warning: #FFC107;
+            --danger: #F44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(18, 140, 126, 0.1), rgba(7, 94, 84, 0.2));
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Pricing Plans */
+        .pricing {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+            color: var(--secondary);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.popular .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-header {
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .pricing-period {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .pricing-features {
+            padding: 30px;
+        }
+
+        .pricing-features ul {
+            list-style: none;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .pricing-footer {
+            padding: 0 30px 30px;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .payment-option {
+            width: 120px;
+            height: 70px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-option img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+        .payment-option.active {
+            border-color: var(--primary);
+            background-color: rgba(37, 211, 102, 0.1);
+        }
+
+        /* Payment Form */
+        .payment-form {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .col {
+            flex: 1;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .order-summary h3 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .summary-total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Success Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        /* Admin Dashboard */
+        .admin-dashboard {
+            padding: 60px 0;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: rgba(37, 211, 102, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            color: var(--gray);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+        }
+
+        .badge-warning {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning);
+        }
+
+        .badge-danger {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--danger);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+     <!-- Payment Section -->
+     <section class="payment-methods">
+        <div class="container">
+            <h2 class="section-title">Payment Information</h2>
+            
+            <div class="payment-form">
+                <h3>Choose Payment Method</h3>
+                <div class="payment-options">
+                    <div class="payment-option active" data-method="card">
+                        <i class="fab fa-cc-stripe fa-3x"></i>
+                    </div>
+                    <div class="payment-option" data-method="paypal">
+                        <i class="fab fa-cc-paypal fa-3x"></i>
+                    </div>
+                    <div class="payment-option" data-method="bank">
+                        <i class="fas fa-university fa-3x"></i>
+                    </div>
+                </div>
+                
+                <div id="card-payment" class="payment-details">
+                    <div class="form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="card-expiry">Expiry Date</label>
+                                <input type="text" id="card-expiry" class="form-control" placeholder="MM/YY">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="card-cvc">CVC</label>
+                                <input type="text" id="card-cvc" class="form-control" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-name">Name on Card</label>
+                        <input type="text" id="card-name" class="form-control" placeholder="John Doe">
+                    </div>
+                </div>
+                
+                <div id="paypal-payment" class="payment-details" style="display: none;">
+                    <p>You will be redirected to PayPal to complete your payment.</p>
+                    <div class="form-group">
+                        <label for="paypal-email">PayPal Email</label>
+                        <input type="email" id="paypal-email" class="form-control" placeholder="your@email.com">
+                    </div>
+                </div>
+                
+                <div id="bank-payment" class="payment-details" style="display: none;">
+                    <p>Please make a transfer to our bank account:</p>
+                    <div class="form-group">
+                        <label>Bank Name</label>
+                        <p>International Bank</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Account Number</label>
+                        <p>1234567890</p>
+                    </div>
+                    <div class="form-group">
+                        <label>SWIFT/BIC</label>
+                        <p>INTLUS33</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Reference</label>
+                        <p>SUNGMD-<span id="order-ref">ORDER123</span></p>
+                    </div>
+                </div>
+                
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+                    <div class="summary-item">
+                        <span>Plan:</span>
+                        <span id="selected-plan">Business Plan</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Price:</span>
+                        <span id="plan-price">$29.99/month</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Tax:</span>
+                        <span id="plan-tax">$2.99</span>
+                    </div>
+                    <div class="summary-item summary-total">
+                        <span>Total:</span>
+                        <span id="plan-total">$32.98</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button id="pay-now" class="btn">Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard (Hidden by default) -->
+    <section class="admin-dashboard" style="display: none;">
+        <div class="container">
+            <div class="dashboard-grid">
+                <div class="sidebar">
+                    <h3>Sung-MD Admin</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="#"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                        <li><a href="#"><i class="fas fa-users"></i> Customers</a></li>
+                        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+                
+                <div class="main-content">
+                    <h2>Dashboard Overview</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>$1,245</h3>
+                            <p>Total Revenue</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>42</h3>
+                            <p>Active Subscriptions</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>87%</h3>
+                            <p>Renewal Rate</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Recent Orders</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Plan</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#ORD-1001</td>
+                                <td>John Smith</td>
+                                <td>Business</td>
+                                <td>$29.99</td>
+                                <td><span class="badge badge-success">Completed</span></td>
+                                <td>2023-06-15</td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-1002</td>
+                                <td>Sarah Johnson</td>
+                                <td>Enterprise</td>
+                                <td>$99.99</td>
+                                <td><span class="badge badge-success">Completed</span></td>
+                                <td>2023-06-14</td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-1003</td>
+                                <td>Michael Brown</td>
+                                <td>Starter</td>
+                                <td>$9.99</td>
+                                <td><span class="badge badge-warning">Pending</span></td>
+                                <td>2023-06-13</td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-1004</td>
+                                <td>Emily Davis</td>
+                                <td>Business</td>
+                                <td>$29.99</td>
+                                <td><span class="badge badge-danger">Failed</span></td>
+                                <td>2023-06-12</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Payment Successful!</h2>
+            <p>Thank you for subscribing to Sung-MD Premium. Your order #ORD-<span id="order-id">12345</span> has been processed successfully.</p>
+            <p>An email confirmation has been sent to your registered email address.</p>
+            <button class="btn" style="margin-top: 20px;">Go to Dashboard</button>
+        </div>
+    </div>
+
+    <script>
+        // Payment Method Selection
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                
+                document.querySelectorAll('.payment-details').forEach(detail => {
+                    detail.style.display = 'none';
+                });
+                
+                const method = this.getAttribute('data-method');
+                document.getElementById(method + '-payment').style.display = 'block';
+            });
+        });
+
+        // Plan Selection
+        document.querySelectorAll('.select-plan').forEach(button => {
+            button.addEventListener('click', function() {
+                const plan = this.getAttribute('data-plan');
+                let planName, planPrice;
+                
+                switch(plan) {
+                    case 'starter':
+                        planName = 'Starter Plan';
+                        planPrice = '$9.99';
+                        break;
+                    case 'business':
+                        planName = 'Business Plan';
+                        planPrice = '$29.99';
+                        break;
+                    case 'enterprise':
+                        planName = 'Enterprise Plan';
+                        planPrice = '$99.99';
+                        break;
+                }
+                
+                document.getElementById('selected-plan').textContent = planName;
+                document.getElementById('plan-price').textContent = planPrice + '/month';
+                
+                // Calculate tax (10% for example)
+                const price = parseFloat(planPrice.replace('$', ''));
+                const tax = (price * 0.1).toFixed(2);
+                const total = (price + parseFloat(tax)).toFixed(2);
+                
+                document.getElementById('plan-tax').textContent = '$' + tax;
+                document.getElementById('plan-total').textContent = '$' + total;
+                
+                // Generate random order reference
+                document.getElementById('order-ref').textContent = Math.floor(100000 + Math.random() * 900000);
+            });
+        });
+
+        // Process Payment
+        document.getElementById('pay-now').addEventListener('click', function() {
+            // Validate form
+            const paymentMethod = document.querySelector('.payment-option.active').getAttribute('data-method');
+            let isValid = true;
+            
+            if (paymentMethod === 'card') {
+                const cardNumber = document.getElementById('card-number').value;
+                const cardExpiry = document.getElementById('card-expiry').value;
+                const cardCvc = document.getElementById('card-cvc').value;
+                const cardName = document.getElementById('card-name').value;
+                
+                if (!cardNumber || !cardExpiry || !cardCvc || !cardName) {
+                    isValid = false;
+                    alert('Please fill in all card details');
+                }
+            } else if (paymentMethod === 'paypal') {
+                const paypalEmail = document.getElementById('paypal-email').value;
+                if (!paypalEmail) {
+                    isValid = false;
+                    alert('Please enter your PayPal email');
+                }
+            }
+            
+            if (isValid) {
+                // Simulate payment processing
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    // Generate random order ID
+                    const orderId = Math.floor(10000 + Math.random() * 90000);
+                    document.getElementById('order-id').textContent = orderId;
+                    
+                    // Show success modal
+                    document.getElementById('success-modal').style.display = 'flex';
+                    
+                    // Reset button
+                    this.innerHTML = 'Pay Now';
+                    this.disabled = false;
+                }, 2000);
+            }
+        });
+
+        // Close Modal
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('success-modal').style.display = 'none';
+        });
+
+        // Initialize with Business plan selected
+        document.querySelector('.pricing-card.popular .select-plan').click();
+    </script>
+
+    <!-- Backend Integration (Example using Firebase) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase (replace with your config)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "your-app.firebaseapp.com",
+            projectId: "your-app",
+            storageBucket: "your-app.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:abcdef1234567890"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Example function to save order to database
+        function saveOrder(orderData) {
+            db.collection("orders").add(orderData)
+                .then(docRef => {
+                    console.log("Order saved with ID: ", docRef.id);
+                })
+                .catch(error => {
+                    console.error("Error saving order: ", error);
+                });
+        }
+
+        // Example Stripe integration
+        function processStripePayment(paymentData) {
+            // In a real app, you would call your backend to create a payment intent
+            // This is just a mock implementation
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({ success: true, paymentId: 'pi_' + Math.random().toString(36).substr(2, 10) });
+                }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>
